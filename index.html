@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>tEp Lates</title>
+    <link rel="stylesheet" href="/static/lates.css">
+</head>
+
+<body>
+    <h1 class="title">Lates for: {{ .Now.Format "Monday January 2, 2006"}}</h1>
+
+    <form class="submit-form" action="/submit" method="POST">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name_input" name="name" required/>
+        </div>
+
+        <div>
+            <label for="name">vegetarian?</label>
+            <input type="checkbox" id="vegetarian_input" name="vegetarian" />
+        </div>
+
+        <div>
+            <label for="name">Refrigerated?</label>
+            <input type="checkbox" id="fridge_input" name="refrigerated" />
+        </div>
+
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form> 
+
+    <div class="lates-table">
+        <div class="col">
+            <div class="label"><div>Name</div></div>
+            {{ range .Lates }}
+                <div class="row-entry">
+                    <div>{{ .Name }}</div>
+                </div>
+            {{ end }}
+        </div>
+        
+        <div class="col">
+            <div class="label"><div>Vegitarian?</div></div>
+            {{ range .Lates }}
+                {{ if .Vegetarian }}
+                    <div class="row-entry">
+                        <div class="notice">Veggie options only, please.</div>
+                    </div>
+                {{ else }}
+                    <div class="row-entry">
+                        <div>Nope.</div>
+                    </div>
+                {{ end }}
+            {{ end }}
+        </div>
+
+        <div class="col">
+            <div class="label"><div>Refridgerated?</div></div>
+            {{ range .Lates }}
+                {{ if .Refrigerated }}
+                    <div class="row-entry">
+                        <div class="notice">Please refridgerate.</div>
+                    </div>
+                {{ else }}
+                    <div class="row-entry">
+                        <div>Nope.</div>
+                    </div>
+                {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</body>
+</html>
