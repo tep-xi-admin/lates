@@ -114,6 +114,10 @@ func (ls *LatesStore) checkTime() {
 
 	// Time usually moves forward, so this should trigger when a new day has started.
 	if oldYear != newYear || oldMonth != newMonth || oldDay != newDay {
+		log.Printf("Dumping logs from date: %s \n", ls.lastReq.Format("01.02.06"))
+		for name, late := range ls.cache {
+			log.Printf("%s: %+v\n", name, late)
+		}
 		ls.cache = make(map[string]Late)
 	}
 	ls.lastReq = time.Now()
