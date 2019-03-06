@@ -22,8 +22,8 @@ func main() {
 	http.HandleFunc("/", renderLates)
 	http.HandleFunc("/submit", handleSubmit)
 
-	log.Println("listening on port 8080...")
-	http.ListenAndServe(":8080", nil)
+	log.Println("listening at 127.0.0.1:8080...")
+	http.ListenAndServe("127.0.0.1:8080", nil)
 }
 
 func renderLates(w http.ResponseWriter, r *http.Request) {
